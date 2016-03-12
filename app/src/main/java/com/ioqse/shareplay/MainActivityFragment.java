@@ -42,7 +42,7 @@ public class MainActivityFragment extends Fragment
         Uri uri = intent.getData();
         String scheme = uri.getScheme();
 
-        String title = "", type = "";
+        String title = "", type = "", fiepath = "";
         int duration = 0;
 
         if (scheme.equals("file"))
@@ -67,8 +67,6 @@ public class MainActivityFragment extends Fragment
                 Song song = new Song(title, duration);
                 songList.AddSong(song);
 
-                String filePath = Environment.getExternalStorageDirectory().toString() + "/file.jpg";
-
                 Toast.makeText(MainActivity.context, "Sending...", Toast.LENGTH_LONG);
             }
 
@@ -76,12 +74,10 @@ public class MainActivityFragment extends Fragment
             if (cursor != null) cursor.close();
         }
 
-        String filePath = Environment.getExternalStorageDirectory().toString() + uri.getLastPathSegment();
-
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType(MediaStore.Audio.Media.CONTENT_TYPE);
         sharingIntent.setComponent(new ComponentName("com.android.bluetooth", "com.android.bluetooth.opp.BluetoothOppLauncherActivity"));
-        sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(filePath)));
+        sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
         startActivityForResult(sharingIntent, 2);
     }
 }

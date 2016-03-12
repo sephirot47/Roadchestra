@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity
 {
     private static String T = "SharePlay";
 
-    public static String serverAddress;
-
     public static Context context;
     public static MainActivityFragment frag;
     public static BluetoothAdapter bluetooth;
