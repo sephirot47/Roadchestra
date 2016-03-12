@@ -3,6 +3,8 @@
     package="com.ioqse.shareplay" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_BLUETOOTH_SHARE" />
 
     <application
         android:allowBackup="true"

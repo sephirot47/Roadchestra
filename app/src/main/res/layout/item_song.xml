@@ -12,7 +12,9 @@
         android:textSize="20sp"
         android:layout_weight="3"
         android:maxLines="1"
-        android:ellipsize="end" />
+        android:ellipsize="marquee"
+        android:width="0dp"
+        android:singleLine="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,8 +23,10 @@
         android:text="2:54"
         android:id="@+id/textSongDuration"
         android:textSize="20sp"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:textAlignment="textEnd"
         android:elegantTextHeight="false"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:width="0dp"
+        android:singleLine="true" />
 </LinearLayout>

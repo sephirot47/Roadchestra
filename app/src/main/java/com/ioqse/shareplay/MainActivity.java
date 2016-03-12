@@ -1,6 +1,9 @@
 package com.ioqse.shareplay;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,12 +18,21 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity
 {
     private static String T = "SharePlay";
+
+    public static String serverAddress;
+
     public static Context context;
     public static MainActivityFragment frag;
+    public static BluetoothAdapter bluetooth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,6 +49,8 @@ public class MainActivity extends AppCompatActivity
         });
 
         context = getApplicationContext();
+
+        InitBluetooth();
     }
 
     @Override
@@ -75,10 +89,23 @@ public class MainActivity extends AppCompatActivity
             {
                 frag.OnSongSelected(intent);
             }
-
-            if (resultCode == Activity.RESULT_CANCELED)
+        }
+        else if (requestCode == 2)
+        {
+            Log.d("ASDDAS", String.valueOf(resultCode));
+            if(resultCode == Activity.RESULT_OK)
             {
             }
+        }
+    }
+
+    protected void InitBluetooth()
+    {
+        bluetooth = BluetoothAdapter.getDefaultAdapter();
+        if (!bluetooth.isEnabled())
+        {
+            Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(turnOn, 0);
         }
     }
 }
