@@ -10,11 +10,11 @@ class Handler:
         print("Hello World!")
 
 builder = Gtk.Builder()
-builder.add_from_file("Prova1.glade")
+builder.add_from_file("Pantalla 3.glade")
 builder.connect_signals(Handler())
 
 window = builder.get_object("window1")
 window.show_all()
-window.fullscreen()
+#window.fullscreen()
 
 Gtk.main()

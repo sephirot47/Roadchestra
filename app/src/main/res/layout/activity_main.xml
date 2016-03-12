@@ -24,6 +24,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/add_icon"
-        android:tint="#FFFFFFFF" />
+        android:tint="#FFFFFFFF"
+        android:background="#CC0000" />
 
 </android.support.design.widget.CoordinatorLayout>

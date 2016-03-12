@@ -18,7 +18,11 @@
         android:text="Songs History"
         android:id="@+id/textView"
         android:textAlignment="center"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textColor="#FF0000"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:focusableInTouchMode="false" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,14 +32,15 @@
         android:id="@+id/textAddASongToTheQueue"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:focusableInTouchMode="false" />
 
     <com.ioqse.shareplay.SongList
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/songList"
         android:layout_below="@+id/textView"
-        android:layout_marginTop="20dp" />
+        android:layout_above="@+id/imageView" />
 
     <ImageView
         android:layout_width="64dp"
@@ -44,5 +49,14 @@
         android:src="@drawable/seat_logo"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:id="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:background="#DDDDDD"
+        android:layout_above="@+id/songList" />
 
 </RelativeLayout>
