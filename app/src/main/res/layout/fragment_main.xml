@@ -11,8 +11,38 @@
     tools:context="com.ioqse.shareplay.MainActivityFragment">
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Songs History"
+        android:id="@+id/textView"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Add a song to the queue"
+        android:id="@+id/textAddASongToTheQueue"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp" />
+
     <com.ioqse.shareplay.SongList
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/songList" />
+        android:id="@+id/songList"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="20dp" />
+
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/seat_logo"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" />
+
 </RelativeLayout>

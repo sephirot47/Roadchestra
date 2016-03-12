@@ -14,13 +14,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 
 public class MainActivityFragment extends Fragment
 {
     private SongList songList;
+    private TextView textAddASongToTheQueue;
 
     public MainActivityFragment()
     {
@@ -33,6 +37,7 @@ public class MainActivityFragment extends Fragment
     {
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
+        textAddASongToTheQueue = (TextView) v.findViewById(R.id.textAddASongToTheQueue);
         songList = (SongList) v.findViewById(R.id.songList);
         return v;
     }
@@ -42,7 +47,7 @@ public class MainActivityFragment extends Fragment
         Uri uri = intent.getData();
         String scheme = uri.getScheme();
 
-        String title = "", type = "", fiepath = "";
+        String title = "";
         int duration = 0;
 
         if (scheme.equals("file"))
@@ -61,8 +66,8 @@ public class MainActivityFragment extends Fragment
                 cursor.moveToFirst();
 
                 title = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.TITLE));
-                //type = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.MIME_TYPE));
                 duration = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DURATION)); //secs
+                duration /= 1000;
 
                 Song song = new Song(title, duration);
                 songList.AddSong(song);
@@ -79,5 +84,6 @@ public class MainActivityFragment extends Fragment
         sharingIntent.setComponent(new ComponentName("com.android.bluetooth", "com.android.bluetooth.opp.BluetoothOppLauncherActivity"));
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
         startActivityForResult(sharingIntent, 2);
+        textAddASongToTheQueue.setVisibility(View.INVISIBLE);
     }
 }

@@ -27,9 +27,19 @@ public class SongAdapter  extends ArrayAdapter<Song>
         }
 
         TextView textSongName = (TextView) convertView.findViewById(R.id.textSongName);
+        TextView textSongDuration = (TextView) convertView.findViewById(R.id.textSongDuration);
 
         textSongName.setText(song.name);
 
+        int minutes = (song.duration % 3600) / 60;
+        int seconds = song.duration % 60;
+        String durationString = "";
+        if(minutes < 10) durationString = String.format("%01d:%02d", minutes, seconds);
+        else durationString = String.format("%02d:%02d", minutes, seconds);
+
+        textSongDuration.setText(durationString);
+
+        textSongName.setSelected(true);
         return convertView;
     }
 }

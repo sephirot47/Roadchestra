@@ -28,5 +28,6 @@
         android:elegantTextHeight="false"
         android:maxLines="1"
         android:width="0dp"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:layout_marginLeft="10dp" />
 </LinearLayout>
