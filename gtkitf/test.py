@@ -30,17 +30,22 @@ class Handler:
         print("Hello World!")
 
     def loop(self):
+
 	files = getfiles("songs")
+	if len(files) == 0:
+		songList.clear()
+		return True 
         songNameExt = subprocess.check_output("ls -lrt songs/ | head -n2 | tail -n1 | sed \"s/ \+/ /g\" | cut -d \" \" -f 9-", stderr=subprocess.STDOUT, shell=True).rstrip()
         
 	songNameExt = files[0]
 	songName = subprocess.check_output("echo \"" + songNameExt + "\" | cut -d\".\" -f1", stderr=subprocess.STDOUT, shell=True)
  	
-	songList.clear();
+	
+	songList.clear()
 	for f in files:
 		duration = subprocess.check_output("mediainfo \"songs/" + f + "\" | grep Duration | tail -n1 | cut -d: -f2 | sed \"s/mn /:/g\" | sed \"s/s//g\"", stderr=subprocess.STDOUT, shell=True).rstrip().lstrip()
 		print duration 
-		songList.append([f,duration])
+		songList.append([f.split(".")[0],duration])
 		treeView.show()
    
 
