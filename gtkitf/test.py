@@ -1,9 +1,19 @@
+#!/usr/bin/python2
 import gi
+import os
+from time import sleep 
 import subprocess
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GObject
+
+def getfiles(dirpath):
+    a = [s for s in os.listdir(dirpath)
+         if os.path.isfile(os.path.join(dirpath, s))]
+    a.sort(key=lambda s: os.path.getmtime(os.path.join(dirpath, s)))
+    return a
+
 
 songList = False
 treeView = False
@@ -11,9 +21,6 @@ treeView = False
 class Handler:
     def __init__(self):
         GObject.timeout_add_seconds(1, self.loop)
-        self.lastSong = 27
-	self.lastSongPath = ""
-	self.playingLastSong = False
         self.playProcess = None
 
     def onDeleteWindow(self, *args):
@@ -23,21 +30,31 @@ class Handler:
         print("Hello World!")
 
     def loop(self):
-        songNameExt = subprocess.check_output("ls -lt songs/ | head -n2 | tail -n1 | sed \"s/ \+/ /g\" | cut -d \" \" -f 9-", stderr=subprocess.STDOUT, shell=True).rstrip()
-        songName = subprocess.check_output("echo \"" + songNameExt + "\" | cut -d\".\" -f1", stderr=subprocess.STDOUT, shell=True)
-  
-  	if (songName != ""):
- 		if (self.playProcess == None or (self.playProcess.poll() != None)) and (not self.playingLastSong) and (self.lastSong != 27):
-       		     self.playingLastSong = True
-                     print "mpv \"songs/" + songNameExt + "\"" 
-	     	     self.playProcess = subprocess.Popen("mpv \"songs/" + songNameExt + "\"", shell=True)
+	files = getfiles("songs")
+        songNameExt = subprocess.check_output("ls -lrt songs/ | head -n2 | tail -n1 | sed \"s/ \+/ /g\" | cut -d \" \" -f 9-", stderr=subprocess.STDOUT, shell=True).rstrip()
+        
+	songNameExt = files[0]
+	songName = subprocess.check_output("echo \"" + songNameExt + "\" | cut -d\".\" -f1", stderr=subprocess.STDOUT, shell=True)
+ 	
+	songList.clear();
+	for f in files:
+		duration = subprocess.check_output("mediainfo \"songs/" + f + "\" | grep Duration | tail -n1 | cut -d: -f2 | sed \"s/mn /:/g\" | sed \"s/s//g\"", stderr=subprocess.STDOUT, shell=True).rstrip().lstrip()
+		print duration 
+		songList.append([f,duration])
+		treeView.show()
+   
 
-		if songName != self.lastSong and songList != None and treeView != None:
-		     self.playingLastSong = False
-		     self.lastSong = songName
-		     self.lastSongPath = "songs/" + songNameExt
-		     songList.append([self.lastSong,"5:10"])
-		     treeView.show()
+	print songNameExt 
+  	if (len(songNameExt) >= 4):
+		exitCode = self.playProcess.poll() if self.playProcess != None else -47
+		if (exitCode != None):
+		     print "exitCode: " + str(exitCode)
+		     print "mpv \"songs/" + songNameExt + "\"" 
+		     if ( len(files) == 1 ):
+		         sleep(5)
+		     self.playProcess = subprocess.Popen("mpv \"songs/" + songNameExt + "\"", shell=True)
+		     if(exitCode == 0):
+			os.system("rm -f \"songs/" + songNameExt + "\"")	
 
 	return True
 
