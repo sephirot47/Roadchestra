@@ -4,13 +4,15 @@
   <!-- interface-naming-policy project-wide -->
   <object class="GtkListStore" id="liststore2">
     <columns>
-      <!-- column-name Duration -->
-      <column type="gchararray"/>
       <!-- column-name Song -->
+      <column type="gchararray"/>
+      <!-- column-name Duration -->
       <column type="gchararray"/>
     </columns>
   </object>
   <object class="GtkWindow" id="window1">
+    <property name="width_request">800</property>
+    <property name="height_request">480</property>
     <property name="can_focus">False</property>
     <child>
       <object class="GtkHPaned" id="hpaned1">
@@ -22,10 +24,14 @@
             <property name="can_focus">True</property>
             <child>
               <object class="GtkHPaned" id="hpaned3">
+                <property name="width_request">680</property>
+                <property name="height_request">120</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <child>
                   <object class="GtkImage" id="image5">
+                    <property name="width_request">120</property>
+                    <property name="height_request">120</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="pixbuf">Logo_Seat.png</property>
@@ -37,13 +43,24 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="label1">
+                    <property name="width_request">560</property>
+                    <property name="height_request">120</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="xalign">0.05000000074505806</property>
+                    <property name="xalign">0.070000000298023224</property>
                     <property name="label" translatable="yes">Welcome Mr Smith</property>
+                    <property name="justify">center</property>
+                    <property name="angle">0.02</property>
+                    <property name="max_width_chars">1</property>
+                    <attributes>
+                      <attribute name="style" value="normal"/>
+                      <attribute name="weight" value="bold"/>
+                      <attribute name="foreground" value="#c64d3cd92491"/>
+                      <attribute name="scale" value="2"/>
+                    </attributes>
                   </object>
                   <packing>
-                    <property name="resize">True</property>
+                    <property name="resize">False</property>
                     <property name="shrink">True</property>
                   </packing>
                 </child>
@@ -58,50 +75,49 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <child>
-                  <object class="GtkVBox" id="vbox2">
+                  <object class="GtkImage" id="image6">
+                    <property name="width_request">120</property>
+                    <property name="height_request">360</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <object class="GtkImage" id="image6">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="pixbuf">Musica.png</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
+                    <property name="pixbuf">Musica.png</property>
                   </object>
                   <packing>
                     <property name="resize">False</property>
-                    <property name="shrink">False</property>
+                    <property name="shrink">True</property>
                   </packing>
                 </child>
                 <child>
                   <object class="GtkTreeView" id="treeview1">
+                    <property name="width_request">560</property>
+                    <property name="height_request">360</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="model">liststore2</property>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn1">
-                        <property name="title" translatable="yes">Duration</property>
+                        <property name="min_width">480</property>
+                        <property name="max_width">480</property>
+                        <property name="title" translatable="yes">Song</property>
+                        <property name="alignment">0.019999999552965164</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                          <attributes>
+                            <attribute name="text">0</attribute>
+                          </attributes>
+                        </child>
                       </object>
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="treeviewcolumn2">
-                        <property name="title" translatable="yes">Song</property>
-                        <property name="alignment">0.05000000074505806</property>
+                        <property name="title" translatable="yes">Duration</property>
+                        <property name="alignment">0.019999999552965164</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                          <attributes>
+                            <attribute name="text">1</attribute>
+                          </attributes>
+                        </child>
                       </object>
                     </child>
                   </object>
@@ -124,6 +140,8 @@
         </child>
         <child>
           <object class="GtkVBox" id="vbox1">
+            <property name="width_request">120</property>
+            <property name="height_request">480</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="homogeneous">True</property>
